@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f2b1fd0c1f79a499ea4bc0bb2b893f, type: 3}
+  m_Name: StrikeEffect
+  m_EditorClassIdentifier: 
+  effectDescription: Thunder Strike and Damgae will During 0.5 time
+  effectPrefab: {fileID: 286159164832284767, guid: 71a15903a50505d43b0d754497ca3a73, type: 3}
+  destroyTime: 0.5
