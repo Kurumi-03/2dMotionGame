@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour, ISave
 {
     public static GameManager Instance;
+    [Header("Base")]
+    public bool firstGame;//是否第一次进入游戏
     [Header("CheckPoint")]
     public CheckPoint[] checkPoints;//游戏场景内所有保存点
     [SerializeField] float bornYOffset;//出生点y偏移

@@ -26,6 +26,7 @@ public class ItemController : MonoBehaviour
             rb.velocity = new Vector2(0, 7);
             return;
         }
+        AudioManager.Instance.SystemAC.OneceAudioPlay(0);
         InventoryManager.instance.AddItem(itemData);
         Destroy(gameObject);
     }

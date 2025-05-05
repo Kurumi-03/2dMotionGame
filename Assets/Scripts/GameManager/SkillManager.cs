@@ -69,6 +69,11 @@ public class SkillManager : MonoBehaviour, ISave
         dodge.AddUnlockListener();
     }
 
+    public void ClearAllUnlock()
+    {
+
+    }
+
 
     public void SaveData(ref GameData data)
     {

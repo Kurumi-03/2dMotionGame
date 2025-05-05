@@ -41,6 +41,8 @@ public class PlayerStats : CharacterStats
         // player.StartCoroutine(player.HitBack());
         //设置受击特效
         player.fx.DamageEffect();
+        //设置受击音效
+        AudioManager.Instance.playerAC.OneceAudioPlay(0);
         //设置受击伤害显示
         GameFX.Instance.popTip.CreateTip(_damage.ToString(), player.transform.position);
     }

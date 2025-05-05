@@ -8,7 +8,6 @@ public class SaveManager : MonoBehaviour
     public static SaveManager Instance;
     [SerializeField] string fileName;
     public string assetDataPath;//存储数据文件的路径 Asset起
-    public bool firstGame;
     [SerializeField] bool encryption;
     [SerializeField] string codeWord;
     List<ISave> saves = new List<ISave>();
@@ -67,7 +66,7 @@ public class SaveManager : MonoBehaviour
     public void NewGame()
     {
         data = new GameData();
-        firstGame = true;
+        GameManager.Instance.firstGame = true;
     }
 
     List<ISave> FindAllSaves()

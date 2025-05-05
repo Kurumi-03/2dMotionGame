@@ -10,6 +10,7 @@ public class GameTip : MonoBehaviour
 
     public void ShowTip(string headerText, string tipText)
     {
+        AudioManager.Instance.SystemAC.OneceAudioPlay(1);
         gameObject.SetActive(true);
         header.text = headerText;
         tip.text = tipText;

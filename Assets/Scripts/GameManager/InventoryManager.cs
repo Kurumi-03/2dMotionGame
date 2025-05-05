@@ -305,7 +305,7 @@ public class InventoryManager : MonoBehaviour, ISave
             return;
         }
         //只有第一次进入游戏才会加入基础装备
-        if (SaveManager.Instance.firstGame == true)
+        if (GameManager.Instance.firstGame == true)
         {
             //初始的默认装备
             foreach (InventoryItem item in startInventory)

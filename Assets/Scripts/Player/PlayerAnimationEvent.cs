@@ -13,9 +13,12 @@ public class PlayerAnimationEvent : MonoBehaviour
     void AttackResult()
     {
         //攻击第三次重击时执行屏幕抖动的特效
-        if(player.attackCombo == 2){
+        if (player.attackCombo == 2)
+        {
             GameFX.Instance.screenShake.Shake(new Vector2(player.faceDir, 1));
         }
+        //设置攻击时的音效
+        AudioManager.Instance.playerAC.OneceAudioPlay(1);
         Collider2D[] colliders = Physics2D.OverlapCircleAll(player.attackCheck.position, player.attackRadius[player.attackCombo]);
         bool isEffect = false;//是否已经执行过特效
         foreach (var hit in colliders)

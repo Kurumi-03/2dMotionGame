@@ -69,6 +69,8 @@ public class CloneController : MonoBehaviour
 
     void AttackResult()
     {
+        //克隆体的攻击音效
+        AudioManager.Instance.playerAC.OneceAudioPlay(1);
         Collider2D[] colliders = Physics2D.OverlapCircleAll(attackCheck.position, attackRadius);
         foreach (var hit in colliders)
         {
