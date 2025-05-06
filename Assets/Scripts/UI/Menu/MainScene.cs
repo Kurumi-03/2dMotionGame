@@ -13,6 +13,14 @@ public class MainScene : MonoBehaviour
     void Start()
     {
         //继续游戏按钮的显示与隐藏
+        StartCoroutine(DelayShowButton());
+        fadeEffect.FadeIn(loadTime, () => { });
+    }
+
+    IEnumerator DelayShowButton()
+    {
+        //下一帧执行
+        yield return new WaitForSeconds(0);
         continueBtn.SetActive(SaveManager.Instance.HasDataFile());
     }
 
@@ -37,5 +45,6 @@ public class MainScene : MonoBehaviour
     public void ExitGame()
     {
         Debug.Log("退出游戏");
+        Application.Quit();
     }
 }

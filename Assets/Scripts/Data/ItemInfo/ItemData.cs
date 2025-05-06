@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Text;
-using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public enum ItemType
 {
@@ -15,7 +15,7 @@ public class ItemData : ScriptableObject
 {
     public ItemType itemType;//物品类型
     public string itemName;//物品名字
-    public string itemId { get; private set; }//用以唯一区别道具   从资源路径转得
+    public string itemId;//用以唯一区别道具   从资源路径转得
     public Sprite itemIcon;//物品图标
 
     [Range(0, 100)]
@@ -29,8 +29,10 @@ public class ItemData : ScriptableObject
         return des.ToString();
     }
 
-    public string GetItemID()
+#if UNITY_EDITOR
+    void OnValidate()
     {
-        return AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(this));
+        itemId = AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(this));
     }
+#endif
 }

@@ -137,4 +137,13 @@ public class PlayerClone : PlayerSkill
         //携带装备效果
         InventoryManager.instance.UseEquipmentEffect(EquipmentType.Weapon, target);
     }
+
+    public override void SkillBelock()
+    {
+        base.SkillBelock();
+        cloneUnlock = false;
+        cloneAggressiveUnlock = false;
+        cloneEffectUnlock = false;
+        cloneDuplicateUnlock = false;
+    }
 }

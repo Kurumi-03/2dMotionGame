@@ -68,6 +68,12 @@ public class SkillSlotController : MonoBehaviour, IPointerEnterHandler, IPointer
         image.color = Color.white;
     }
 
+    public void ClearUnlock(){
+        // Debug.Log(skillName+"清除解锁状态");
+        unlock = false;
+        image.color = unLockColor;
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         controller.skillTip.ShowTip(skillName, skillDes, skillCost);

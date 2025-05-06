@@ -25,6 +25,7 @@ public class PlayerDash : PlayerSkill
     {
         base.Start();
     }
+
     protected override void CheckUnlock()
     {
         if (dashSlot.unlock)
@@ -75,6 +76,14 @@ public class PlayerDash : PlayerSkill
             }
         });
 
+    }
+
+    public override void SkillBelock()
+    {
+        base.SkillBelock();
+        dashUnlock = false;
+        dashStartUnlock = false;
+        dashEndUnlock = false;
     }
 
     public void CanCreateCloneStart()

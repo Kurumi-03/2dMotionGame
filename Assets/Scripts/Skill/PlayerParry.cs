@@ -85,6 +85,14 @@ public class PlayerParry : PlayerSkill
         });
     }
 
+    public override void SkillBelock()
+    {
+        base.SkillBelock();
+        parryUnlock = false;
+        parryHealUnlock = false;
+        parryCloneUnlock = false;
+    }
+
 
     public void ParryCreateClone(Transform enemy)
     {

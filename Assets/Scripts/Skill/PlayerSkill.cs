@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.MemoryProfiler;
 using UnityEngine;
 
 public class PlayerSkill : MonoBehaviour
@@ -38,6 +37,11 @@ public class PlayerSkill : MonoBehaviour
     public virtual void UseSkill()
     {
         cdTimer = cd;
+    }
+
+    public virtual void SkillBelock()
+    {
+        
     }
 
     //查找当前最近的敌人位置

@@ -1,12 +1,13 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class InventoryManager : MonoBehaviour, ISave
 {
     public static InventoryManager instance;
+    public List<ItemData> itemDatas = new List<ItemData>();//所有物品数据
     public List<InventoryItem> startInventory = new List<InventoryItem>();//初始物品
     public List<InventoryItem> equipmentInventroy = new List<InventoryItem>();//装备仓库
     public List<InventoryItem> materialInventory = new List<InventoryItem>();//材料仓库
@@ -85,7 +86,7 @@ public class InventoryManager : MonoBehaviour, ISave
                     playerPanel.GetChild(j).GetComponent<ItemSlotController>().UpdateItemSlot(new InventoryItem(equipmentList[i]));
                 }
                 //刷新游戏内ui
-                if(equipmentList[i].equipmentType == EquipmentType.Flask)
+                if (equipmentList[i].equipmentType == EquipmentType.Flask)
                 {
                     flaskPanel.GetComponent<ItemSlotController>().UpdateItemSlot(new InventoryItem(equipmentList[i]));
                 }
@@ -364,6 +365,27 @@ public class InventoryManager : MonoBehaviour, ISave
         }
     }
 
+    //得到所有装备数据
+#if UNITY_EDITOR
+    [ContextMenu("GetItemData")]
+    public void GetItemData()
+    {
+        List<ItemData> items = new List<ItemData>();
+        //得到存储的所有数据文件id  item和equipment都在
+        string[] allID = AssetDatabase.FindAssets("", new[] { "Assets/Data/Item" });
+        for (int i = 0; i < allID.Length; i++)
+        {
+            string path = AssetDatabase.GUIDToAssetPath(allID[i]);
+            ItemData item = AssetDatabase.LoadAssetAtPath<ItemData>(path);
+            //文件夹也会被识别为物体
+            if(item == null) continue;
+            items.Add(item);
+            // Debug.Log("第" + i + "个道具为:" + items[i].name);
+        }
+        itemDatas = items;
+    }
+#endif
+
     //游戏数据保存
     public void SaveData(ref GameData data)
     {
@@ -373,17 +395,17 @@ public class InventoryManager : MonoBehaviour, ISave
         //保存仓库内的装备
         for (int i = 0; i < equipmentInventroy.Count; i++)
         {
-            data.itemInventroy.Add(equipmentInventroy[i].data.GetItemID(), equipmentInventroy[i].amount);
+            data.itemInventroy.Add(equipmentInventroy[i].data.itemId, equipmentInventroy[i].amount);
         }
         //保存仓库内的
         for (int i = 0; i < materialInventory.Count; i++)
         {
-            data.itemInventroy.Add(materialInventory[i].data.GetItemID(), materialInventory[i].amount);
+            data.itemInventroy.Add(materialInventory[i].data.itemId, materialInventory[i].amount);
         }
         //保存身上的装备
         for (int i = 0; i < equipmentList.Count; i++)
         {
-            data.equipments.Add(equipmentList[i].GetItemID());
+            data.equipments.Add(equipmentList[i].itemId);
         }
     }
 
@@ -391,28 +413,18 @@ public class InventoryManager : MonoBehaviour, ISave
     public void LoadData(GameData data)
     {
         if (data == null) return;
-        //得到存储的所有数据文件id  item和equipment都在
-        string[] allID = AssetDatabase.FindAssets("", new[] { SaveManager.Instance.assetDataPath });
-        List<ItemData> items = new List<ItemData>();
-        for (int i = 0; i < allID.Length; i++)
-        {
-            string path = AssetDatabase.GUIDToAssetPath(allID[i]);
-            ItemData item = AssetDatabase.LoadAssetAtPath<ItemData>(path);
-            items.Add(item);
-            // Debug.Log("第" + i + "个道具为:" + items[i].name);
-        }
 
         //得到数据文件中的ItemInventroy存储内容
-        for (int i = 0; i < items.Count; i++)
+        for (int i = 0; i < itemDatas.Count; i++)
         {
             //将文件id进行对比 
             foreach (KeyValuePair<string, int> item in data.itemInventroy)
             {
                 //因为资源会识别到文件夹 所以有些数据会为空
-                if (items[i] != null && items[i].GetItemID() == item.Key)
+                if (itemDatas[i] != null && itemDatas[i].itemId == item.Key)
                 {
-                    // Debug.Log("itemName:" + items[i].name);
-                    InventoryItem newItem = new InventoryItem(items[i]);
+                    // Debug.Log("itemName:" + itemDatas[i].name);
+                    InventoryItem newItem = new InventoryItem(itemDatas[i]);
                     newItem.amount = item.Value;
                     loadItem.Add(newItem);
                 }
@@ -420,13 +432,13 @@ public class InventoryManager : MonoBehaviour, ISave
         }
 
         //得到数据文件中存储的equipment存储内容
-        for (int i = 0; i < items.Count; i++)
+        for (int i = 0; i < itemDatas.Count; i++)
         {
             foreach (string equip in data.equipments)
             {
-                if (items[i] != null && items[i].GetItemID() == equip)
+                if (itemDatas[i] != null && itemDatas[i].itemId == equip)
                 {
-                    loadEquipment.Add(items[i] as EquipmentData);
+                    loadEquipment.Add(itemDatas[i] as EquipmentData);
                 }
             }
         }

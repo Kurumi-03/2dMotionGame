@@ -78,4 +78,10 @@ public class PlayerBlackHole : PlayerSkill
     {
         player.blackHoleState.SetUpData(flyTime, flyForce, fallForce);
     }
+
+    public override void SkillBelock()
+    {
+        base.SkillBelock();
+        blackHoleUnlock = false;
+    }
 }

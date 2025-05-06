@@ -231,4 +231,14 @@ public class PlayerCrystal : PlayerSkill
             }
         });
     }
+
+    public override void SkillBelock()
+    {
+        base.SkillBelock();
+        crystalUnlock = false;
+        canExplore = false;
+        canMove = false;
+        canMultiple = false;
+        canCreateClone = false;
+    }
 }

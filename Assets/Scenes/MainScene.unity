@@ -782,7 +782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeEffect: {fileID: 894006239}
-  loadTime: 2
+  loadTime: 0.3
   gameScene: GameScene
   continueBtn: {fileID: 204883479}
 --- !u!1 &611894221
@@ -1279,6 +1279,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4076628677298376298, guid: d7aaa5d3207f7ab49a54949d8fbef2a3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076628677298376299, guid: d7aaa5d3207f7ab49a54949d8fbef2a3, type: 3}
+      propertyPath: encryption
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4076628677298376301, guid: d7aaa5d3207f7ab49a54949d8fbef2a3, type: 3}

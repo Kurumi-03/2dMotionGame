@@ -59,6 +59,13 @@ public class PlayerDodge : PlayerSkill
         });
     }
 
+    public override void SkillBelock()
+    {
+        base.SkillBelock();
+        dodgeUnlock = false;
+        dodgeCloneUnlock = false;
+    }
+
     public void CreateEvasionClone(Transform target, int faceDir)
     {
         if (dodgeCloneUnlock)

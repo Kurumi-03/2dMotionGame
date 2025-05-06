@@ -303,4 +303,14 @@ public class PlayerSowrd : PlayerSkill
     {
         enemy.SetVulnerable(vulnerabilityTime, vulnerabilityPercent);
     }
+
+    public override void SkillBelock()
+    {
+        base.SkillBelock();
+        swordUnlock = false;
+        canThrow = false;
+        sowrdType = SwordSkill.None;
+        swordFreezeUnlock = false;
+        swordVulnerabilityUnlock = false;
+    }
 }

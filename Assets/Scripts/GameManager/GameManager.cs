@@ -37,13 +37,13 @@ public class GameManager : MonoBehaviour, ISave
             Destroy(Instance.gameObject);
         }
     }
-    
+
     void Awake()
     {
         GetInstance();
         GetAllCheckPoint();
     }
-    
+
 
     void Start()
     {
@@ -66,10 +66,12 @@ public class GameManager : MonoBehaviour, ISave
     //游戏是否暂停
     public void GamePause(bool isPause)
     {
-        if(isPause){
+        if (isPause)
+        {
             Time.timeScale = 0;
         }
-        else{
+        else
+        {
             Time.timeScale = 1;
         }
     }
@@ -77,9 +79,14 @@ public class GameManager : MonoBehaviour, ISave
     //游戏退出
     public void GameExit()
     {
+        Debug.Log("GameExit");
         //在退出游戏时需要保存数据
         SaveManager.Instance.SaveGame();
-        Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false; // 编辑器模式下停止运行
+#else
+        Application.Quit(); // 编译后程序正常退出
+#endif
     }
 
     public void SaveData(ref GameData data)

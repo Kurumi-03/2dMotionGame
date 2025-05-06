@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveManager : MonoBehaviour
 {
@@ -66,7 +67,10 @@ public class SaveManager : MonoBehaviour
     public void NewGame()
     {
         data = new GameData();
-        GameManager.Instance.firstGame = true;
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.firstGame = true;
+        }
     }
 
     List<ISave> FindAllSaves()
@@ -93,6 +97,8 @@ public class SaveManager : MonoBehaviour
     //关闭游戏进程时
     void OnApplicationQuit()
     {
-        SaveGame();
+        if(SceneManager.GetActiveScene().name == "GameScene"){
+            SaveGame();
+        }
     }
 }

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,7 +39,7 @@ public class SkillManager : MonoBehaviour, ISave
         dodge = GetComponent<PlayerDodge>();
     }
 
-    void OnEnable()
+    void Start()
     {
         skills.Add(dash);
         skills.Add(clone);
@@ -71,7 +70,14 @@ public class SkillManager : MonoBehaviour, ISave
 
     public void ClearAllUnlock()
     {
-
+        for (int i = 0; i < skillSlots.Count; i++)
+        {
+            skillSlots[i].ClearUnlock();
+        }
+        for (int i = 0; i < skills.Count; i++)
+        {
+            skills[i].SkillBelock();
+        }
     }
 
 
